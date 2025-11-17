@@ -2,6 +2,7 @@ import json
 import random
 import time
 import numpy as np
+from encoder import encode_payload, decode_payload
 from confluent_kafka import Producer
 
 DIRECCIONES_VIENTO = ["N", "NO", "O", "SO", "S", "SE", "E", "NE"]
@@ -42,6 +43,17 @@ def test_generar_medicion():
         medicion = generar_medicion()
         print(medicion)
 
+
+def test_encode():
+    original = {"temperatura": 56.32, "humedad": 51, "direccion_viento": "SO"}
+
+    print(original)
+    b = encode_payload(original["temperatura"], original["humedad"], original["direccion_viento"])
+    print("Bytes enviados:", b)
+
+    decoded = decode_payload(b)
+    print("Decodificado:", decoded)
+
 def sender():
     config = {
         'bootstrap.servers': '147.182.219.133:9092'
@@ -62,4 +74,6 @@ def sender():
 
 
 # test_generar_medicion()
-sender()
+# sender()
+
+test_encode()
