@@ -61,5 +61,5 @@ def sender():
 
 
 
-test_generar_medicion()
-#sender()
+# test_generar_medicion()
+sender()
